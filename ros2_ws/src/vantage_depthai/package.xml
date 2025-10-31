@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>vantage_depthai</name>
+  <version>0.1.0</version>
+  <description>DepthAI launch files for dual ToF with FSIN</description>
+  <maintainer email="dev@vantage.local">Vantage</maintainer>
+  <license>Apache-2.0</license>
+  <buildtool_depend>ament_cmake</buildtool_depend>
+  <exec_depend>depthai_ros_driver</exec_depend>
+</package>

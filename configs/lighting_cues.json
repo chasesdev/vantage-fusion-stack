@@ -1,0 +1,9 @@
+{
+  "scenes": [
+    {
+      "name": "portrait_neutral",
+      "intensity": 180,
+      "color_temp": 4200
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+camera:
+  i_enable_imu: false
+  i_enable_thermal: false
+  i_pipeline_dump: false
+tof:
+  i_enable: true
+  i_fps: 30

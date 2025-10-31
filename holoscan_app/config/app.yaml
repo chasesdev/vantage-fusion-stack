@@ -1,0 +1,54 @@
+resources:
+  cuda_pool:
+    type: holoscan.BlockMemoryPool
+    params:
+      storage_type: 1
+      block_size: 16777216
+      num_blocks: 64
+
+operators:
+  r5c_v4l:
+    type: holoscan.ops.V4L2VideoCaptureOp
+    params:
+      device: "/dev/video2"
+      width: 3840
+      height: 2160
+      framerate: 60
+
+  fmt:
+    type: holoscan.ops.FormatConverterOp
+    params:
+      out_dtype: "rgb888"
+
+  tof_src:
+    type: Ros2DepthSubscribeOp
+    params:
+      depth_topic: "/camera/depth/image_rect_raw"
+      conf_topic: "/camera/confidence/image_rect"
+      conf_min: 0
+
+  align:
+    type: TimeAlignMuxOp
+    params:
+      tolerance_ns: 10000000
+
+  fuse:
+    type: VideoTofFuseOp
+    params:
+      calibration_path: "holoscan_app/config/calibration.json"
+      z_min: 0.3
+      z_max: 2.0
+      alpha: 0.6
+      splat_radius: 1
+      conf_min: 0
+
+  ros_pub:
+    type: Ros2PublishOp
+    params:
+      topic_name: "/vantage/fused/image"
+      use_nitros: false
+
+  rec:
+    type: holoscan.ops.VideoStreamRecorderOp
+    params:
+      directory: "/data/cases/case_001"

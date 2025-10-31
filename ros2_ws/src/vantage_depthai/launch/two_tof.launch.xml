@@ -1,0 +1,19 @@
+<launch>
+  <node pkg="depthai_ros_driver" exec="camera_node" name="tof_a" output="screen">
+    <param name="camera.i_nn_type" value="none"/>
+    <param name="tof.i_enable" value="true"/>
+    <param name="tof.i_fps" value="30"/>
+    <param name="camera.i_mx_id" value="REPLACE_WITH_SERIAL_A"/>
+    <param name="camera.r_external_frame_sync" value="input"/>
+    <rosparam subst_value="true" file="$(find-pkg-share vantage_depthai)/params/tof.yaml"/>
+  </node>
+
+  <node pkg="depthai_ros_driver" exec="camera_node" name="tof_b" output="screen">
+    <param name="camera.i_nn_type" value="none"/>
+    <param name="tof.i_enable" value="true"/>
+    <param name="tof.i_fps" value="30"/>
+    <param name="camera.i_mx_id" value="REPLACE_WITH_SERIAL_B"/>
+    <param name="camera.r_external_frame_sync" value="input"/>
+    <rosparam subst_value="true" file="$(find-pkg-share vantage_depthai)/params/tof.yaml"/>
+  </node>
+</launch>
